@@ -1,0 +1,54 @@
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Local machine / SDK config
+local.properties
+
+# IDE — IntelliJ / Android Studio
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# IDE — Eclipse / VS Code
+.classpath
+.project
+.settings/
+.vscode/
+*.code-workspace
+
+# Node / Appium
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm/
+
+# Allure
+allure-results/
+allure-report/
+**/allure-results/
+**/allure-report/
+
+# Test artifacts
+captures/
+screenshots/
+test-output/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Native / Android leftover build caches
+.externalNativeBuild/
+.cxx/
+*.apk
+*.ap_
+*.aab
+*.dex
+*.class
