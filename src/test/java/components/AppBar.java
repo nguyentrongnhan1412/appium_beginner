@@ -8,13 +8,11 @@ import io.appium.java_client.AppiumBy;
 public class AppBar {
     private final Element sideMenuButton = new Element(
             AppiumBy.accessibilityId("View menu"),
-            "Side Menu Button",
-            false);
+            "Side Menu Button");
 
     private final Element cartButton = new Element(
             By.id("com.saucelabs.mydemoapp.android:id/cartIV"),
-            "Cart Button",
-            false);
+            "Cart Button");
 
     public void openSideMenu() {
         sideMenuButton.click();

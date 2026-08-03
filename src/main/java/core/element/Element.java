@@ -13,25 +13,15 @@ public class Element {
     private final By by;
     private final String name;
     private final int timeout;
-    private final boolean scrollToFind;
 
     public Element(By by, String name) {
-        this(by, name, ConfigurationUtils.getInt("timeout.default"), true);
-    }
-
-    public Element(By by, String name, boolean scrollToFind) {
-        this(by, name, ConfigurationUtils.getInt("timeout.default"), scrollToFind);
+        this(by, name, ConfigurationUtils.getInt("timeout.default"));
     }
 
     public Element(By by, String name, int timeout) {
-        this(by, name, timeout, true);
-    }
-
-    public Element(By by, String name, int timeout, boolean scrollToFind) {
         this.by = by;
         this.name = name;
         this.timeout = timeout;
-        this.scrollToFind = scrollToFind;
     }
 
     public By getBy() {
@@ -47,10 +37,7 @@ public class Element {
     }
 
     public WebElement waitForVisible() {
-        if (scrollToFind) {
-            return WaitUtils.waitForVisibleAfterScroll(by, timeout);
-        }
-        return WaitUtils.waitForVisible(by, timeout);
+        return WaitUtils.waitForVisibleAfterScroll(by, timeout);
     }
 
     public WebElement waitForEnabled() {
