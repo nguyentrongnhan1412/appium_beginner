@@ -34,6 +34,25 @@ tasks.test {
     useTestNG {
         suites("src/test/resources/testng.xml")
     }
+
+    // Forward -D overrides from the Gradle JVM into the TestNG worker JVM
+    listOf(
+        "env",
+        "platform",
+        "deviceName",
+        "platformVersion",
+        "udid",
+        "app",
+        "appPackage",
+        "appActivity",
+        "noReset",
+        "fullReset",
+        "test.account.username",
+        "test.account.password"
+    ).forEach { key ->
+        System.getProperty(key)?.let { value -> systemProperty(key, value) }
+    }
+
     // Generate HTML even when tests fail
     finalizedBy(tasks.allureReport)
     testLogging {

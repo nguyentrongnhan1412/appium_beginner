@@ -85,11 +85,25 @@ Key properties (set locally; do not commit secrets or machine-specific IDs):
 
 JSON fixtures under `src/test/resources/data/` drive data providers and account lookups:
 
-- `accounts.json` — named accounts used by tests
+- `accounts.json` — named accounts used by tests (credentials left empty in git)
 - `credentials.json` — login validation scenarios
 - `products.json` — cart product scenarios
 
-Use demo-app credentials only. Do not put production secrets in these files.
+### Account credentials
+
+`TestAccount` resolves the `TEST` account in this order:
+
+1. JVM system properties: `-Dtest.account.username` / `-Dtest.account.password`
+2. Environment variables: `TEST_ACCOUNT_USERNAME` / `TEST_ACCOUNT_PASSWORD`
+3. Values in `accounts.json` (local-only fallback)
+
+Do not commit real passwords. For local runs with the Sauce Labs demo app:
+
+```powershell
+$env:TEST_ACCOUNT_USERNAME = "bod@example.com"
+$env:TEST_ACCOUNT_PASSWORD = "10203040"
+.\gradlew.bat test
+```
 
 ## Running tests
 
@@ -111,6 +125,19 @@ On Windows PowerShell:
 ```
 
 Suite entry point: `src/test/resources/testng.xml` (`LoginTest`, `CartTest`).
+
+## CI (GitHub Actions)
+
+Workflow: `.github/workflows/android-tests.yml`.
+
+Create these repository secrets (Settings → Secrets and variables → Actions):
+
+| Secret | Example (demo app) |
+| --- | --- |
+| `TEST_ACCOUNT_USERNAME` | `bod@example.com` |
+| `TEST_ACCOUNT_PASSWORD` | `10203040` |
+
+The job maps those secrets to `TEST_ACCOUNT_USERNAME` / `TEST_ACCOUNT_PASSWORD`, boots an Android emulator, installs the My Demo App APK, starts Appium, and runs `./gradlew test`.
 
 ## Reports
 
