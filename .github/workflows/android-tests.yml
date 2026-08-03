@@ -9,6 +9,7 @@ on:
 jobs:
   android-tests:
     runs-on: ubuntu-latest
+    environment: QA
     timeout-minutes: 45
 
     env:
@@ -22,7 +23,7 @@ jobs:
       - name: Verify account secrets
         run: |
           if [ -z "$TEST_ACCOUNT_USERNAME" ] || [ -z "$TEST_ACCOUNT_PASSWORD" ]; then
-            echo "Set repository secrets TEST_ACCOUNT_USERNAME and TEST_ACCOUNT_PASSWORD."
+            echo "Set QA environment secrets TEST_ACCOUNT_USERNAME and TEST_ACCOUNT_PASSWORD."
             exit 1
           fi
 

@@ -128,9 +128,9 @@ Suite entry point: `src/test/resources/testng.xml` (`LoginTest`, `CartTest`).
 
 ## CI (GitHub Actions)
 
-Workflow: `.github/workflows/android-tests.yml`.
+Workflow: `.github/workflows/android-tests.yml` (uses the **QA** GitHub Environment).
 
-Create these repository secrets (Settings → Secrets and variables → Actions):
+Add these secrets under **Settings → Environments → QA → Environment secrets**:
 
 | Secret | Example (demo app) |
 | --- | --- |
