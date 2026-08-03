@@ -34,6 +34,12 @@ public class BaseTest {
         putIfPresent(capabilities, "appium:app", "app");
         putIfPresent(capabilities, "appium:appPackage", "appPackage");
         putIfPresent(capabilities, "appium:appActivity", "appActivity");
+        putIfPresent(capabilities, "appium:appWaitActivity", "appWaitActivity");
+
+        String appWaitDuration = ConfigurationUtils.get("appWaitDuration");
+        if (appWaitDuration != null && !appWaitDuration.isBlank()) {
+            capabilities.put("appium:appWaitDuration", Integer.parseInt(appWaitDuration.trim()));
+        }
 
         capabilities.put(
                 "appium:noReset",
