@@ -43,7 +43,6 @@ jobs:
       - name: Install Appium
         run: |
           npm ci
-          npx appium driver install uiautomator2
           npx appium --version
           npx appium driver list --installed
 
