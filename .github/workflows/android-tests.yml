@@ -72,18 +72,20 @@ jobs:
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           script: |
-            set -euo pipefail
+            set -e
 
             adb wait-for-device
             adb install -r apps/mda.apk
 
             npx appium --address 127.0.0.1 --port 4723 --log appium.log &
-            for i in $(seq 1 30); do
+            i=1
+            while [ "$i" -le 30 ]; do
               if curl -sf http://127.0.0.1:4723/status >/dev/null; then
                 echo "Appium is up"
                 break
               fi
               sleep 2
+              i=$((i + 1))
             done
 
             ./gradlew test --no-daemon \
